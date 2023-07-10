@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4btin Linkleri</title>
+    <title>4btin Links</title>
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
@@ -95,6 +95,20 @@
         <h2 class="logo-name">4btin</h2>
       </div>
       <ul class="link-list">
+        <li>
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+            </svg>
+          </div>
+          <a href="#" onclick="downloadVCard('Abtin Ansarihaghi', '+90 537 839 4331', '4btin.a.haghi@gmail.com', '4btin', 'United States', 'https://www.4btin.com.tr/'); return false;">
+            Add to Contacts
+          </a>
+        </li>
         <li>
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-world-www" width="44" height="44" viewBox="0 0 24 24" stroke-width="2" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -193,5 +207,30 @@
         </li>
       </ul>
     </div>
+    <script>
+      function downloadVCard(name, phoneNumber, email, company, country, website) {
+        var vcard = `BEGIN:VCARD
+                    VERSION:3.0
+                    N:${name}
+                    FN:${name}
+                    TEL;TYPE=CELL:${phoneNumber}
+                    EMAIL:${email}
+                    ORG:${company}
+                    ADR;TYPE=WORK,PREF:;;;;
+                    LABEL:${company}\\n${country}
+                    URL:${website}
+                    END:VCARD`;
+        var blob = new Blob([vcard], { type: 'text/vcard' });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', `${name.replace(/\s/g, '')}.vcf`);
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+    </script>
   </body>
 </html>
